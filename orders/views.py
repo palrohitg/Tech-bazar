@@ -133,8 +133,6 @@ def place_order(request, total=0, quantity=0,):
                 'tax': tax,
                 'grand_total': grand_total,
             }
-            print(order)
-            print(context)
             return render(request, 'orders/payments.html', context)
     else:
         return redirect('checkout')
