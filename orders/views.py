@@ -75,6 +75,10 @@ def payments(request):
     return JsonResponse(data)
 
 def place_order(request, total=0, quantity=0,):
+    """
+        Description of the function should be here
+
+    """
     current_user = request.user
 
     # If the cart count is less than or equal to 0, then redirect back to shop
@@ -95,7 +99,7 @@ def place_order(request, total=0, quantity=0,):
         form = OrderForm(request.POST)
         if form.is_valid():
             # Store all the billing information inside Order table
-            data = Order()
+            data = Order() # Creating object of the order models 
             data.user = current_user
             data.first_name = form.cleaned_data['first_name']
             data.last_name = form.cleaned_data['last_name']
@@ -129,6 +133,8 @@ def place_order(request, total=0, quantity=0,):
                 'tax': tax,
                 'grand_total': grand_total,
             }
+            print(order)
+            print(context)
             return render(request, 'orders/payments.html', context)
     else:
         return redirect('checkout')
