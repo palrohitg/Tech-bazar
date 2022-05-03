@@ -15,7 +15,7 @@ class Product(models.Model):
     images = models.ImageField(upload_to='photos/products')
     stock = models.IntegerField()
     is_available = models.BooleanField(default=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE) # continue deleting the cascading models instance as well 
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
@@ -82,7 +82,7 @@ class Variation(models.Model):
         return self.variation_value
 
 
-class ReviewRating(models.Model):
+class ReviewRating(models.Model):   
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     subject = models.CharField(max_length=100, blank=True)
